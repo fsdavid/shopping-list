@@ -5,10 +5,10 @@
 
   <button [routerLink]='["search"]' (click)="clearSearchResults()" class ="menu-item" mat-button>
     <mat-icon>search</mat-icon>
-    <span class="text">Search product</span>
+    <span class="text" *ngIf="!mobile">Search product</span>
   </button>
   <button [routerLink]='[""]' (click)="clearSearchResults()" class ="menu-item" mat-button>
     <mat-icon>list</mat-icon>
-    <span class="text">Shopping Lists</span>
+    <span class="text" *ngIf="!mobile">Shopping Lists</span>
   </button>
 </mat-toolbar>

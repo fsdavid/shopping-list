@@ -5,6 +5,7 @@ import {Store} from '@ngrx/store';
 import * as storeActions from '../resources/store/store.actions';
 import * as storeReducer from '../resources/store/store.reducers';
 import {Router} from '@angular/router';
+import {IsMobileService} from '../resources/services/is-mobile.service';
 
 @Component({
   selector: 'app-all-lists',
@@ -16,16 +17,25 @@ export class AllListsComponent implements OnInit {
   mouseIsHoveringCard = null;
   shoppingLists: ShoppingListModel[] = [];
   shoppingListsObservable: Observable<{shoppingLists: ShoppingListModel[]}>;
+  mobile = false;
 
 
-  constructor( private store: Store<storeReducer.StoreState>, private router: Router) { }
+  constructor( private store: Store<storeReducer.StoreState>, private router: Router, private isMobile: IsMobileService) { }
 
   ngOnInit() {
+    // Get Data from Store
     this.shoppingListsObservable = this.store.select('store');
     this.shoppingListsObservable.subscribe(s => {
       this.shoppingLists = s.shoppingLists;
 
     });
+
+    // Check if Device is Mobile
+    if (this.isMobile.isMobile()) {
+      this.mobile = true;
+    }
+
+
   }
 
   createShoppingList() {

@@ -49,7 +49,7 @@
                     <input disabled class="item-count-input" [value]="product.itemCount">
                     <mat-button-toggle class="inc-dec-count-buttons" value = "+" (change)="ChangeItemCount(product.item.code, 2)">+</mat-button-toggle>
                   </mat-button-toggle-group>
-                  <span *ngIf="mouseIsHoveringCard == i">
+                  <span *ngIf="mouseIsHoveringCard == i || mobile">
                     <button (click)="removeItemFromList(product.item.code)" class="item-card-button" color="warn" mat-mini-fab>
                       <mat-icon>delete</mat-icon>
                     </button>

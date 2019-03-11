@@ -5,7 +5,7 @@
       <mat-card class="list-card" [routerLink]='["/list/" + shoppingList.listId]' (mouseenter)="mouseHoveringListCard(i)" (mouseleave)="mouseLeftListCard()" [class.mat-elevation-z4]="mouseIsHoveringCard === i" #ListCard>
         {{shoppingList.shoppingListName}}
         <div class="list-card-description">{{shoppingList.shoppingListDescription}}</div>
-        <span  (click)="onEvent($event);removeShoppingList(shoppingList.listId)" *ngIf="mouseIsHoveringCard == i" class="list-card-remove-button">
+        <span  (click)="onEvent($event);removeShoppingList(shoppingList.listId)" *ngIf="mouseIsHoveringCard == i || mobile" class="list-card-remove-button">
           <button class="item-card-button" color="warn" mat-mini-fab>
             <mat-icon>delete</mat-icon>
           </button>

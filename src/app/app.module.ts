@@ -16,6 +16,7 @@ import {storeReducer} from './resources/store/store.reducers';
 import {StoreEffects} from './resources/store/store.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
+import {IsMobileService} from './resources/services/is-mobile.service';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import {environment} from '../environments/environment';
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [],
+  providers: [IsMobileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

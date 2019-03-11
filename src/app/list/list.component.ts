@@ -8,6 +8,7 @@ import * as storeReducer from '../resources/store/store.reducers';
 import {Observable, Subscription} from 'rxjs/index';
 import {Store} from '@ngrx/store';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {IsMobileService} from '../resources/services/is-mobile.service';
 
 export interface DialogData {
   url: string;
@@ -82,8 +83,9 @@ export class ListComponent implements OnInit, OnDestroy {
   openedCardSearch: number;
   helpMenuOpen: string;
   helpMenuOpenSearch: string;
+  mobile = false;
 
-  constructor (private route: ActivatedRoute, private store: Store<storeReducer.StoreState>, public dialog: MatDialog) { }
+  constructor (private route: ActivatedRoute, private store: Store<storeReducer.StoreState>, public dialog: MatDialog, private isMobile: IsMobileService) { }
 
   ngOnInit() {
     this.helpMenuOpen = 'out';
@@ -127,6 +129,14 @@ export class ListComponent implements OnInit, OnDestroy {
         });
 
     });
+
+
+    // Check if Device is Mobile
+    if (this.isMobile.isMobile()) {
+      this.mobile = true;
+    }
+
+
 
   }
 
