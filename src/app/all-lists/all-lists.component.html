@@ -1,0 +1,23 @@
+<div style="width: 100%; display: flex; justify-content: center; ">
+<div style="width: 90%; display: flex; justify-content: center; margin-top: 30px; align-items: center; flex-wrap: wrap">
+
+  <div *ngFor="let shoppingList of shoppingLists; let i = index" style="overflow-wrap: break-word; margin: 15px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap">
+    <mat-card style="position: relative; outline: none; cursor: pointer; width: 200px; height: 200px; padding: 50px; font-size: 35px; font-family: 'Roboto', sans-serif;" [routerLink]='["/list/" + shoppingList.listId]' (mouseenter)="mouseHoveringListCard(i)"(mouseleave)="mouseLeftListCard()" [class.mat-elevation-z4]="mouseIsHoveringCard === i" #ListCard>
+      {{shoppingList.shoppingListName}}
+      <div style="font-size: 20px; margin-top: 20px;font-family: 'Montserrat', sans-serif; color: rgba(0,0,0,0.4)">{{shoppingList.shoppingListDescription}}</div>
+      <span  (click)="onEvent($event);removeShoppingList(shoppingList.listId)" style="position: absolute; top: 0; right: 10px;" *ngIf="mouseIsHoveringCard == i">
+        <button class="item-card-button" color="warn" mat-mini-fab>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </span>
+    </mat-card>
+  </div>
+
+  <div style="display: flex; justify-content: center; align-items: center; width: 200px; height: 200px;">
+    <button (click)="createShoppingList()" style="width: 80px; height: 80px; " mat-fab>
+     <mat-icon  aria-label="Example icon-button with a heart icon">add</mat-icon>
+   </button>
+  </div>
+</div>
+</div>
+

@@ -1,3 +1,5 @@
+import {Query} from './query.model';
+
 export class CurrentQuery {
   query: Query;
   url: string;
@@ -6,3 +8,8 @@ export class CurrentQuery {
     this.url = url;
   }
 }
+//
+// export interface CurrentQuery {
+//   query: Query;
+//   url: string;
+// }

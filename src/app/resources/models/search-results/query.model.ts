@@ -4,3 +4,8 @@ export class Query {
     this.value = value;
   }
 }
+//
+//
+// export interface Query {
+//   value: string;
+// }

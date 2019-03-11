@@ -1,0 +1,99 @@
+
+
+<div class="container">
+  <div class="search-container">
+    <input (keyup)="onKey($event)" (click)="focusToInput('fromInput')" [ngClass]="focused? 'focus': null" placeholder="Search..." #SearchField>
+    <div class="search" (click)="focusToInput('fromIcon')"></div>
+  </div>
+
+
+
+<mat-card class="card" *ngIf="searchResult.freeTextSearch">
+  <mat-card-title>Search Results</mat-card-title>
+
+  <mat-card-content>
+    <div class="list-container" >
+      <span *ngIf="!searchResult.products || !searchResult.products.length" class="empty-list"> Search Results is Empty</span>
+
+
+      <div *ngFor="let searchProduct of searchResult.products; let i = index">
+
+
+        <mat-card #ItemsCard class="item-card mat-elevation-z0 " (mouseenter)="mouseHoveringSearchCard(i)" (mouseleave)="mouseLeftSearchCard()" [class.mat-elevation-z4]="mouseIsHoveringSearchCard == i">
+
+
+          <div style="display: inline-block; width: 100%">
+            <mat-card-header  style="cursor: pointer">
+
+              <img mat-card-avatar [src] = "'https://api.efood.real.de/' + searchProduct.images[0].url" class="header-image" (click)="toggleHelpMenuSearch(i)"/>
+              <mat-card-title (click)="toggleHelpMenuSearch(i)">{{searchProduct.name}}</mat-card-title>
+              <mat-card-subtitle (click)="toggleHelpMenuSearch(i)">{{searchProduct.brand}}</mat-card-subtitle>
+              <span class="fill-between-right-and-left" (click)="toggleHelpMenuSearch(i)">&nbsp;</span>
+
+              <span class="card-top-right-side">
+                <span class="item-price">{{searchProduct.price.formattedValue}}</span>
+
+                <span>
+                  <button class="item-card-button" style="background-color: green;" [matMenuTriggerFor]="menu" mat-mini-fab>
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </span>
+                <mat-menu #menu="matMenu">
+                  <span *ngFor="let shoppingList of shoppingLists; let i = index;">
+                    <span class="shopping-list-in-add">
+                      <button mat-menu-item (click)="addItemToList(searchProduct.code, shoppingList.listId)">
+                        <span>{{shoppingList.shoppingListName}}</span>
+                        <span *ngIf="itemAdded(searchProduct.code, shoppingList.listId)" class="shopping-list-in-add-badge">
+                          <span>{{itemAddedCount(searchProduct.code, shoppingList.listId)}}</span>
+                        </span>
+                      </button>
+                    </span>
+                  </span>
+                </mat-menu>
+
+              </span>
+
+            </mat-card-header>
+
+            <div [@slideInOutSearch]="helpMenuOpenSearch" >
+              <div *ngIf="openedCardSearch === i" >
+
+                <div class="card_description">
+                  <div class="card_left" >
+                    <img (click)="openDialog('https://api.efood.real.de/' + searchProduct.images[searchProduct.images.length - 1].url)" [src] = "'https://api.efood.real.de/' + searchProduct.images[searchProduct.images.length - 1].url"/>
+                  </div>
+                  <div class="card_right">
+                    <div class="card-title" [innerHTML]="searchProduct.description"></div>
+                    <span class="fill-between-right-and-left">&nbsp;</span>
+                    <div class="stock-info" style="align-self: flex-end">
+                      <div class="stock-flex">
+                        <div class="item-added-chip base-price" *ngIf="searchProduct.price.basePrice">
+                          Base Price: {{searchProduct.price.basePrice.basePriceBaseFactor}} {{searchProduct.price.basePrice.basePriceUnit}} - €{{searchProduct.price.basePrice.basePrice}}
+                        </div>
+                        <div class="stock-available" [ngStyle]="{backgroundColor: searchProduct.stock ? '#8CC13F' : '#ED1651'}">
+                          <span *ngIf="searchProduct.stock; else OutOfStockSearch">In Stock.</span>
+                          <ng-template #OutOfStockSearch>Out of stock.</ng-template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </mat-card>
+
+      </div>
+
+
+      <span *ngIf="searchResult.products && searchResult.products.length" class="detail-search-text">Load more</span>
+
+
+    </div>
+  </mat-card-content>
+</mat-card>
+
+</div>

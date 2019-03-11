@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+
+.card {
+  margin-top: 100px;
+  width: 80%;
+  max-width: 1000px;
+  font-family: 'Raleway', sans-serif;
+
+
+  .item-price {
+    align-self: center;
+    margin-right: 10px;
+    white-space: nowrap;
+  }
+  .item-added-chip {
+    margin: 0 5px 0 5px;
+    border-radius: 20px;
+    background-color: rgba(0,0,0,0.1);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.1), 0 2px 2px rgba(0,0,0,0.1);
+    padding: 5px;
+    white-space: nowrap;
+  }
+  .card-top-right-side {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+  }
+  .list-title {
+  }
+  .empty-list {
+    opacity: 0.6;
+  }
+  .list-container {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .detail-search-text {
+    align-self: center;
+    color: blue;
+    cursor: pointer;
+  }
+
+  //// Mini Search ////
+  $transition: all .5s ease;
+  .search {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 30px;
+    background-color: #CCCCCC;
+    position: relative;
+    overflow: hidden;
+    transition: $transition;
+    &:before {
+      display: block;
+      height: 100%;
+      position: relative;
+      transition: $transition;
+    }
+    &.open {
+      width: 420px;
+      &:before {
+        position: absolute;
+      }
+    }
+  }
+  .search-box {
+    width: 80%;
+    height: 100%;
+    margin: -1px 30px 7px 10px;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    color: #242628;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+
+    &:focus {
+      outline: none;
+    }
+  }
+  .search-button {
+    box-sizing: border-box;
+    width: auto;
+    height: 100%;
+    position: absolute;
+    right: 3px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+
+  .search-row {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    cursor: pointer;
+
+  }
+  //// End Mini Search ////
+
+  //// Items Styles ////
+  .item-card {
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+
+    .fill-between-right-and-left {
+      flex: 1 1 auto;
+      align-self: stretch;
+      margin-left: -20px;
+    }
+    .fill-between-top-and-down {
+      //flex: 1 auto auto;
+      display: flex;
+      flex-direction: column;
+      align-self: stretch;
+    }
+    .item-card-button {
+      align-self: center;
+      margin: 0 5px auto 5px;
+    }
+    .pm-card-button {
+      min-width: 80px;
+      height: 40px
+    }
+    .mat-card-actions, .mat-card-content, .mat-card-subtitle {
+      margin-bottom: 0;
+    }
+    .mat-button-toggle-checked {
+      background-color: transparent;
+    }
+    .header-image {
+      background-size: cover;
+      object-fit: cover;
+      object-position: top;
+    }
+    .item-count-input {
+      font-family: 'Raleway', sans-serif;
+
+      outline: none;
+      border: none;
+      width: 25px;
+      text-align: center;
+      &:disabled {
+        background: transparent;
+      }
+    }
+
+    .mat-card-header .mat-card-title {
+      margin-bottom: 0;
+      padding-bottom: 12px;
+    }
+
+
+    .inc-dec-count-buttons {
+      display: flex;
+      align-items: center;
+    }
+
+    .item-bottom-border {
+      width: 80%;
+      height: 1px;
+      margin: 0px auto;
+      border-bottom: 1px solid #CCCCCC;
+    }
+
+    .item-check-box {
+      margin-right: 10px;
+    }
+
+
+
+    .stock-info {
+      margin: 0 30px 30px 0;
+      align-self: flex-end;
+      justify-self: flex-end;
+      font-family: 'Raleway', sans-serif;
+      .stock-flex {
+        display: flex;
+        align-items: center;
+      }
+      .base-price {
+        margin-right: 20px;
+
+        //margin: 0 5px 0 5px;
+        border-radius: 20px;
+        background-color: rgba(0,0,0,0.1);
+        padding: 5px;
+        white-space: nowrap;
+      }
+      .stock-available {
+        padding: 10px 5px 10px 5px;
+      }
+      img {
+        background-size: cover;
+        object-fit: cover;
+        object-position: top;
+      }
+    }
+  }
+
+}
+
+.card_description {
+  width: 100%;
+  height: auto;
+  //cursor: pointer;
+  background:transparent;
+  display: flex;
+  flex-direction: row;
+
+  left:0;
+  right:0;
+  margin-bottom: 20px;
+  top:0;
+  bottom:0;
+  border-radius:10px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.10);;
+}
+
+
+
+
+.card_left {
+  display: block;
+  width:40%;
+  //height:150px;
+  //float:left;
+  flex: 1;
+  order: 1;
+  overflow:hidden;
+  background:transparent;
+  img {
+
+    cursor: pointer;
+    width:100%;
+    height:200px;
+    object-fit: cover;
+    object-position: top;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+  }
+}
+
+.card_right {
+  display: block;
+  width:60%;
+  float:left;
+  overflow: hidden;
+  flex: 2;
+  order: 2;
+  display: flex;
+  flex-direction: column;
+
+  border-radius:0 10px 10px 0;
+  -webkit-border-radius:0 10px 10px 0;
+  -moz-border-radius:0 10px 10px 0;
+  .card-title {
+    color: #233656;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:200;
+    text-align:left;
+    font-size:14px;
+    margin:10px 0 0 0;
+    padding:0 0 0 20px;
+    letter-spacing:1px;
+  }
+
+}
+

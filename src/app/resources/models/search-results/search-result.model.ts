@@ -1,3 +1,8 @@
+import {CurrentQuery} from './current-query.model';
+import {Pagination} from './pagination.model';
+import {Sort} from './sort.model';
+import {Product} from '../products/product.model';
+
 export class SearchResultsModel {
   type: string;
   currentQuery: CurrentQuery;
@@ -20,3 +25,12 @@ export class SearchResultsModel {
   }
 
 }
+
+// export interface SearchResultsModel {
+//   type: string;
+//   currentQuery: CurrentQuery;
+//   freeTextSearch: string;
+//   pagination?: Pagination;
+//   products?: Product[];
+//   sorts?: Sort[];
+// }
