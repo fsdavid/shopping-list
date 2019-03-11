@@ -2,6 +2,11 @@
 Application is created for Real.
 Appication is to maintain shopping list from Supermarket Real Products. Users can manage shopping lists and products inside shopping list. Thay can get detail information about products.
 
+<br> All data, which user will change will save in web application state and will relevant before webpage refreshs. <strong>After webpage refresh, all data will reset automatically. Application does not store any data in any database.</strong>
+
+## Demo
+<a target="_blank" href="http://list.fsdavid.com/">Live Demo</a>
+
 ## API connection
 To use application you should allow "Access-Control-Allow-Origin".
   So, You need to add store app.
