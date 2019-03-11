@@ -21,6 +21,9 @@
     padding: 5px;
     white-space: nowrap;
   }
+  .flex-direction-column {
+    flex-direction: column;
+  }
   .card-top-right-side {
     align-self: flex-start;
     display: flex;
@@ -143,6 +146,7 @@
       background-size: cover;
       object-fit: cover;
       object-position: top;
+      margin-right: 10px;
     }
     .item-count-input {
       font-family: 'Raleway', sans-serif;

@@ -9,11 +9,11 @@
 
 
 <mat-card class="card" *ngIf="searchResult.freeTextSearch">
-  <div class="search-results-header">
+  <div class="search-results-header" [ngClass] = "{'flex-direction-column' : mobile}">
     <mat-card-title>Search Results</mat-card-title>
 
-
-    <span class="sort-by-span">Sort by: </span>
+    <span class="display-flex" style="align-items: center">
+      <span class="sort-by-span">Sort by: </span>
       <mat-form-field>
         <mat-select (selectionChange)="sortByChanged($event.value)" disableRipple [(value)]="selectedSearchBy">
           <mat-option value="relevance">Relevance</mat-option>
@@ -23,6 +23,7 @@
           <mat-option value="price-desc">Price Desc</mat-option>
         </mat-select>
       </mat-form-field>
+    </span>
     </div>
 
   <mat-card-content>
@@ -37,11 +38,19 @@
 
 
           <div class="card-inline">
-            <mat-card-header class="cursor-pointer">
+            <mat-card-header [ngClass] = "{'flex-direction-column' : mobile}" class="cursor-pointer">
 
-              <img mat-card-avatar [src] = "'https://api.efood.real.de/' + searchProduct.images[0].url" class="header-image" (click)="toggleHelpMenuSearch(i)"/>
-              <mat-card-title (click)="toggleHelpMenuSearch(i)">{{searchProduct.name}}</mat-card-title>
-              <mat-card-subtitle (click)="toggleHelpMenuSearch(i)">{{searchProduct.brand}}</mat-card-subtitle>
+
+              <span class="display-flex">
+                  <img mat-card-avatar [src] = "'https://api.efood.real.de/' + searchProduct.images[0].url" class="header-image" (click)="toggleHelpMenu(i)"/>
+                  <span class="display-flex;" style="flex-direction: row;">
+                    <mat-card-title (click)="toggleHelpMenuSearch(i)">{{searchProduct.name}}</mat-card-title>
+                    <mat-card-subtitle (click)="toggleHelpMenuSearch(i)">{{searchProduct.brand}}</mat-card-subtitle>
+                  </span>
+                </span>
+              <!--<img mat-card-avatar [src] = "'https://api.efood.real.de/' + searchProduct.images[0].url" class="header-image" (click)="toggleHelpMenuSearch(i)"/>-->
+              <!--<mat-card-title (click)="toggleHelpMenuSearch(i)">{{searchProduct.name}}</mat-card-title>-->
+              <!--<mat-card-subtitle (click)="toggleHelpMenuSearch(i)">{{searchProduct.brand}}</mat-card-subtitle>-->
               <span class="fill-between-right-and-left" (click)="toggleHelpMenuSearch(i)">&nbsp;</span>
 
               <span class="card-top-right-side">
