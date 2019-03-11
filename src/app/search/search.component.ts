@@ -75,7 +75,7 @@ export class SearchComponent implements OnInit {
   }
   SearchItems(query: string, sortBy: string = 'relevance', currentPage: string = '1', pageSize: string = '10') {
     this.showSpinner();
-    this.store.dispatch(new storeActions.FetchSearchResults({query: query, sortBy: sortBy, currentPage: currentPage, pageSize: pageSize, isFirstFetch: true}));
+    this.store.dispatch(new storeActions.FetchSearchResults({query: query, sortBy: this.selectedSearchBy, currentPage: currentPage, pageSize: pageSize, isFirstFetch: true}));
   }
   SearchMoreItems() {
     const currentSort = this.searchResult.sorts.find(f => f.selected === true);
