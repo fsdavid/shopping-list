@@ -79,7 +79,7 @@ export class SearchComponent implements OnInit {
   }
   SearchMoreItems() {
     const currentSort = this.searchResult.sorts.find(f => f.selected === true);
-    this.store.dispatch(new storeActions.FetchSearchResults({query: this.searchResult.freeTextSearch, sortBy: currentSort.name, currentPage: (+this.searchResult.pagination.currentPage + 1).toString(), pageSize: '20', isFirstFetch: false}));
+    this.store.dispatch(new storeActions.FetchSearchResults({query: this.searchResult.freeTextSearch, sortBy: currentSort.code, currentPage: (+this.searchResult.pagination.currentPage + 1).toString(), pageSize: '20', isFirstFetch: false}));
   }
 
   clearSearchResults() {
