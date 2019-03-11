@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {fadeAnimation} from './animations';
 import {ShoppingListItem, ShoppingListModel} from './resources/models/shopping-list/shopping-list.model';
 import {Observable} from 'rxjs/index';
 import * as storeActions from './resources/store/store.actions';
@@ -10,11 +9,6 @@ import {Store} from '@ngrx/store';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-
-
-  // animations: [fadeAnimation], // register the animations
-
-
 })
 export class AppComponent implements OnInit {
   title = 'shopping-list';
@@ -25,14 +19,18 @@ export class AppComponent implements OnInit {
   constructor( private store: Store<storeReducer.StoreState>) {}
 
   ngOnInit() {
+
+    // Attach test data to state
     this.shoppingListsObservable = this.store.select('store');
     this.shoppingListsObservable.subscribe(s => {
       this.shoppingLists = s.shoppingLists;
     });
-
-
     if (this.shoppingLists.length < 2) {
-      this.store.dispatch(new storeActions.CreateShoppingList(new ShoppingListModel(1, 'Test List', 'This is test list with random items inside.', this.demoSearchResult)));
+      this.store.dispatch(
+        new storeActions.CreateShoppingList(
+          new ShoppingListModel(1, 'Test List', 'This is test list with random items inside.', this.demoSearchResult)
+        )
+      );
     }
 
   }

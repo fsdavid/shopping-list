@@ -1,2 +1,57 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+.main-page-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .main-page-center-container {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    align-items: center;
+    flex-wrap: wrap
+  }
+  .list-cards-container {
+    overflow-wrap: break-word;
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap
+  }
+  .list-card {
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+    padding: 50px;
+    font-size: 35px;
+    font-family: 'Roboto', sans-serif;
+  }
+  .list-card-description {
+    font-size: 20px;
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(0,0,0,0.4)
+  }
+  .list-card-remove-button {
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
+  .add-list-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+  }
+  .add-list-item-button {
+    width: 80px;
+    height: 80px;
+  }
+}

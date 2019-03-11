@@ -106,6 +106,7 @@ export class SearchComponent implements OnInit {
     return count;
   }
 
+  // Other methods for html
   toggleHelpMenuSearch(i: number): void {
     if (this.openedCardSearch === i) {
       this.helpMenuOpenSearch = this.helpMenuOpenSearch === 'out' ? 'in' : 'out';

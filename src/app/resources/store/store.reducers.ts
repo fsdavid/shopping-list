@@ -191,8 +191,6 @@ export function storeReducer (state = initialState, action: storeActions.StoreAc
       };
 
 
-
-
     case (storeActions.CLEAR_SEARCH_RESULTS) :
       return {
         ...state,

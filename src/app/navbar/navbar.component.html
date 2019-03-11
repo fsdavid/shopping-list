@@ -1,18 +1,14 @@
 <mat-toolbar class="toolbar">
-
   <span [routerLink]='[""]' (click)="clearSearchResults()" class="logo"><img class="image" src="../../assets/theme-images/logo.png"><span>Shopping List</span></span>
 
-  <!-- This fills the remaining space of the current row -->
   <span class="fill-between-right-and-left"></span>
 
   <button [routerLink]='["search"]' (click)="clearSearchResults()" class ="menu-item" mat-button>
     <mat-icon>search</mat-icon>
     <span class="text">Search product</span>
   </button>
-
   <button [routerLink]='[""]' (click)="clearSearchResults()" class ="menu-item" mat-button>
     <mat-icon>list</mat-icon>
     <span class="text">Shopping Lists</span>
   </button>
-
 </mat-toolbar>

@@ -255,13 +255,6 @@ export class ListComponent implements OnInit, OnDestroy {
 
   }
 
-  // openImageUrl: string;
-  //
-  // openImage(url: string) {
-  //   this.openImageUrl = url;
-  //
-  // }
-
   openDialog(url: string): void {
     const dialogRef = this.dialog.open(ImageDialog, {
       width: 'auto',
@@ -276,13 +269,13 @@ export class ListComponent implements OnInit, OnDestroy {
 
 @Component({
   selector: 'dialog-overview-example-dialog',
-  template: '<img [src] = "data.imageUrl"/>',
+  template: '<img [src] = "dataD[\'imageUrl\']"/>',
 })
 export class ImageDialog {
 
   constructor(
     public dialogRef: MatDialogRef<ImageDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public dataD: DialogData) {}
 
   onNoClick(): void {
     this.dialogRef.close();

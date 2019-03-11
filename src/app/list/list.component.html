@@ -34,8 +34,8 @@
 
             <mat-checkbox (click) = "CheckListItem(product.item.code)" class="item-check-box" [checked]="product.itemChecked" color = "primary"></mat-checkbox>
 
-            <div style="display: inline-block; width: 100%">
-              <mat-card-header  style="cursor: pointer">
+            <div class="card-inline">
+              <mat-card-header class="cursor-pointer">
 
                 <img mat-card-avatar [src] = "'https://api.efood.real.de/' + product.item.images[0].url" class="header-image" (click)="toggleHelpMenu(i)"/>
                 <mat-card-title (click)="toggleHelpMenu(i)">{{product.item.name}}</mat-card-title>
@@ -93,14 +93,13 @@
 
         </div>
 
-        <div *ngIf="itemsPrice" style="align-self: flex-end;">price: € {{itemsPrice}}</div>
+        <div *ngIf="itemsPrice" class="align-flex-end">price: € {{itemsPrice}}</div>
 
         <div class="search-row">
           <div class="search" [ngClass] = "{'open' : searchItemOpen}">
             <input [disabled]="!searchItemOpen" #SearchInput class="search-box" (keyup)="onKey($event)" />
             <span (click)="openMiniSearch()" class="search-button">
               <mat-icon [@rotatedState]='iconRotationState' style="color: #242628;">add</mat-icon>
-              <!--<span class="search-icon"></span>-->
             </span>
           </div>
           <span *ngIf="!searchItemOpen" (click)="openMiniSearch()">Add first product</span>
@@ -128,8 +127,8 @@
           <mat-card #ItemsCard class="item-card mat-elevation-z0 " (mouseenter)="mouseHoveringSearchCard(i)" (mouseleave)="mouseLeftSearchCard()" [class.mat-elevation-z4]="mouseIsHoveringSearchCard == i">
 
 
-            <div style="display: inline-block; width: 100%">
-              <mat-card-header  style="cursor: pointer">
+            <div class="card-inline">
+              <mat-card-header class="cursor-pointer">
 
                 <img mat-card-avatar [src] = "'https://api.efood.real.de/' + searchProduct.images[0].url" class="header-image" (click)="toggleHelpMenuSearch(i)"/>
                 <mat-card-title (click)="toggleHelpMenuSearch(i)">{{searchProduct.name}}</mat-card-title>
@@ -142,7 +141,7 @@
 
                   <span *ngIf="itemAdded(searchProduct.code)" class="inc-dec-count-buttons">
                     <span class="item-added-chip"> Added {{itemAddedCount(searchProduct.code)}}</span>
-                    <span style="display: flex; " (click)="addItemToList(searchProduct.code)">
+                    <span class="display-flex" (click)="addItemToList(searchProduct.code)">
                       <button class="item-card-button" color="primary" mat-mini-fab>
                        <mat-icon>plus_one</mat-icon>
                       </button>
@@ -176,7 +175,7 @@
                     <div class="card_right">
                       <div class="card-title" [innerHTML]="searchProduct.description"></div>
                       <span class="fill-between-right-and-left">&nbsp;</span>
-                      <div class="stock-info" style="align-self: flex-end">
+                      <div class="stock-info align-flex-end">
                         <div class="stock-flex">
                           <div class="item-added-chip base-price" *ngIf="searchProduct.price.basePrice">
                             Base Price: {{searchProduct.price.basePrice.basePriceBaseFactor}} {{searchProduct.price.basePrice.basePriceUnit}} - €{{searchProduct.price.basePrice.basePrice}}
@@ -211,16 +210,5 @@
 
   </mat-card>
 
-
-
-
-
-
-
-
-
-
-
-
 </div>
-<div style="min-height: 200px;"></div>
+<div class="foother-space"></div>

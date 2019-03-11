@@ -41,6 +41,10 @@
     color: blue;
     cursor: pointer;
   }
+  .card-inline {
+    display: inline-block;
+    width: 100%
+  }
 
   //// Mini Search ////
   $transition: all .5s ease;
@@ -275,5 +279,15 @@
     letter-spacing:1px;
   }
 
+}
+
+.cursor-pointer {
+  cursor: pointer
+}
+.align-flex-end {
+  align-self: flex-end;
+}
+.display-flex {
+  display: flex;
 }
 

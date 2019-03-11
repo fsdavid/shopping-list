@@ -36,8 +36,8 @@
         <mat-card #ItemsCard class="item-card mat-elevation-z0 " (mouseenter)="mouseHoveringSearchCard(i)" (mouseleave)="mouseLeftSearchCard()" [class.mat-elevation-z4]="mouseIsHoveringSearchCard == i">
 
 
-          <div style="display: inline-block; width: 100%">
-            <mat-card-header  style="cursor: pointer">
+          <div class="card-inline">
+            <mat-card-header class="cursor-pointer">
 
               <img mat-card-avatar [src] = "'https://api.efood.real.de/' + searchProduct.images[0].url" class="header-image" (click)="toggleHelpMenuSearch(i)"/>
               <mat-card-title (click)="toggleHelpMenuSearch(i)">{{searchProduct.name}}</mat-card-title>
@@ -79,7 +79,7 @@
                   <div class="card_right">
                     <div class="card-title" [innerHTML]="searchProduct.description"></div>
                     <span class="fill-between-right-and-left">&nbsp;</span>
-                    <div class="stock-info" style="align-self: flex-end">
+                    <div class="stock-info align-flex-end">
                       <div class="stock-flex">
                         <div class="item-added-chip base-price" *ngIf="searchProduct.price.basePrice">
                           Base Price: {{searchProduct.price.basePrice.basePriceBaseFactor}} {{searchProduct.price.basePrice.basePriceUnit}} - €{{searchProduct.price.basePrice.basePrice}}

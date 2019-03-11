@@ -1,7 +1,7 @@
 import {
   MatBadgeModule,
   MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatIconModule,
-  MatInputModule, MatMenuModule, MatSelect, MatSelectModule,
+  MatInputModule, MatMenuModule, MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
 import {NgModule} from '@angular/core';
