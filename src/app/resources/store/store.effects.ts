@@ -12,10 +12,9 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class StoreEffects {
   @Effect()
-  getUserInfo: Observable<Action> = this.actions$.pipe(
+  fetchSearchResults: Observable<Action> = this.actions$.pipe(
     ofType<FetchSearchResults>('FETCH_SEARCH_RESULTS'),
     mergeMap((action) => {
-
       return this.httpClient.get<SearchResultsModel>(
         'https://api.efood.real.de/api/v2/real/products/search?query=' +
         action.payload['query'] + ':' + action.payload['sortBy'] +
@@ -24,10 +23,17 @@ export class StoreEffects {
           responseType: 'json'
         }).pipe(
           map(data => {
-            return {
-              type: 'ADD_SEARCH_RESULTS',
-              payload: data
-            };
+            if (action.payload['isFirstFetch']) {
+              return {
+                type: 'ADD_SEARCH_RESULTS',
+                payload: data
+              };
+            } else {
+              return {
+                type: 'UPDATE_SEARCH_RESULTS',
+                payload: data
+              };
+            }
           }
           ),
           // catchError(() => [{type: 'LOGOUT'}])
@@ -35,6 +41,7 @@ export class StoreEffects {
       }
     )
   );
+
 
   constructor(private actions$: Actions,
               private httpClient: HttpClient,

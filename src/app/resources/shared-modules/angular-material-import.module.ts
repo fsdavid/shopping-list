@@ -1,7 +1,7 @@
 import {
   MatBadgeModule,
   MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatIconModule,
-  MatInputModule, MatMenuModule,
+  MatInputModule, MatMenuModule, MatSelect, MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
 import {NgModule} from '@angular/core';
@@ -17,7 +17,8 @@ import {NgModule} from '@angular/core';
     MatButtonToggleModule,
     MatDialogModule,
     MatMenuModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSelectModule,
   ],
 
   exports: [
@@ -30,7 +31,8 @@ import {NgModule} from '@angular/core';
     MatButtonToggleModule,
     MatDialogModule,
     MatMenuModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSelectModule
   ],
 })
 export class AngularMaterialImportModule { }

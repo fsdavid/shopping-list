@@ -9,7 +9,21 @@
 
 
 <mat-card class="card" *ngIf="searchResult.freeTextSearch">
-  <mat-card-title>Search Results</mat-card-title>
+  <div class="search-results-header">
+    <mat-card-title>Search Results</mat-card-title>
+
+
+    <span class="sort-by-span">Sort by: </span>
+      <mat-form-field>
+        <mat-select (selectionChange)="sortByChanged($event.value)" disableRipple [(value)]="selectedSearchBy">
+          <mat-option value="relevance">Relevance</mat-option>
+          <mat-option value="name-asc">Name Asc</mat-option>
+          <mat-option value="name-desc">Name Desc</mat-option>
+          <mat-option value="price-asc">Price Asc</mat-option>
+          <mat-option value="price-desc">Price Desc</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
   <mat-card-content>
     <div class="list-container" >
@@ -89,7 +103,7 @@
       </div>
 
 
-      <span *ngIf="searchResult.products && searchResult.products.length" class="detail-search-text">Load more</span>
+      <span class="detail-search-text"><img src="../../assets/theme-images/tail-spin.svg"></span>
 
 
     </div>

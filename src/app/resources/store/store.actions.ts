@@ -18,7 +18,6 @@ export const CHECK_ITEM_IN_SHOPPING_LIST = 'CHECK_ITEM_IN_SHOPPING_LIST';
 // Manage Searching
 export const FETCH_SEARCH_RESULTS = 'FETCH_SEARCH_RESULTS';
 export const ADD_SEARCH_RESULTS = 'ADD_SEARCH_RESULTS';
-export const FETCH_MORE_SEARCH_RESULTS = 'FETCH_MORE_SEARCH_RESULTS';
 export const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS';
 export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS';
 
@@ -65,17 +64,12 @@ export class CheckItemInShoppingList implements Action {
 //// Manage searching ////
 export class FetchSearchResults implements Action {
   readonly type = FETCH_SEARCH_RESULTS;
-  constructor (public payload: {query: string, sortBy: string, currentPage: string, pageSize: string}) {}
+  constructor (public payload: {query: string, sortBy: string, currentPage: string, pageSize: string, isFirstFetch: boolean}) {}
 }
 
 export class AddSearchResults implements Action {
   readonly type = ADD_SEARCH_RESULTS;
   constructor (public payload: SearchResultsModel) {}
-}
-
-export class FetchMoreSearchResults implements Action {
-  readonly type = FETCH_MORE_SEARCH_RESULTS;
-  constructor (public payload: {query: string, sortBy: string, currentPage: string, pageSize: string}) {}
 }
 
 export class UpdateSearchResults implements Action {
@@ -99,7 +93,6 @@ export type StoreActions =
   CheckItemInShoppingList |
   FetchSearchResults |
   AddSearchResults |
-  FetchMoreSearchResults |
   UpdateSearchResults |
   ClearSearchResults
   ;

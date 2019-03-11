@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import * as storeActions from '../resources/store/store.actions';
 import * as storeReducer from '../resources/store/store.reducers';
 import {SearchResultsModel} from '../resources/models/search-results/search-result.model';
@@ -30,7 +30,7 @@ import {ShoppingListItem, ShoppingListModel} from '../resources/models/shopping-
 })
 export class SearchComponent implements OnInit {
 
-  focused = false;
+  focused = true;
   searchResult: SearchResultsModel;
   shoppingLists: ShoppingListModel[];
   shoppingListObservable: Observable<{shoppingLists: ShoppingListModel[], searchResults: SearchResultsModel}>;
@@ -39,6 +39,8 @@ export class SearchComponent implements OnInit {
   openedCardSearch: number;
   helpMenuOpenSearch: string;
   firstOpen: boolean;
+  spinnerVisible = false;
+  selectedSearchBy = 'relevance';
 
   @ViewChild('SearchField') searchInput: ElementRef;
 
@@ -48,6 +50,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.firstOpen = true;
+    this.searchInput.nativeElement.focus();
     this.shoppingListObservable = this.store.select('store');
     this.shoppingListObservable.subscribe(s => {
       this.searchResult = s.searchResults;
@@ -58,6 +61,7 @@ export class SearchComponent implements OnInit {
         if (s.searchResults.products.length) {
           this.focused = true;
           this.searchInput.nativeElement.value = s.searchResults.freeTextSearch;
+          this.selectedSearchBy = s.searchResults.pagination.sort;
         }
       }
 
@@ -70,15 +74,25 @@ export class SearchComponent implements OnInit {
     this.SearchItems(event.target.value);
   }
   SearchItems(query: string, sortBy: string = 'relevance', currentPage: string = '1', pageSize: string = '10') {
-    this.store.dispatch(new storeActions.FetchSearchResults({query: query, sortBy: sortBy, currentPage: currentPage, pageSize: pageSize}));
+    this.showSpinner();
+    this.store.dispatch(new storeActions.FetchSearchResults({query: query, sortBy: sortBy, currentPage: currentPage, pageSize: pageSize, isFirstFetch: true}));
   }
+  SearchMoreItems() {
+    const currentSort = this.searchResult.sorts.find(f => f.selected === true);
+    this.store.dispatch(new storeActions.FetchSearchResults({query: this.searchResult.freeTextSearch, sortBy: currentSort.name, currentPage: (+this.searchResult.pagination.currentPage + 1).toString(), pageSize: '20', isFirstFetch: false}));
+  }
+
   clearSearchResults() {
+    this.searchInput.nativeElement.value = '';
     this.store.dispatch(new storeActions.ClearSearchResults());
   }
 
   addItemToList(code: string, listId: number) {
-    const productToAdd = this.searchResult.products.find(obj => obj.code === code);
-    this.store.dispatch(new storeActions.AddItemToShoppingList({item: new ShoppingListItem(false, 1, productToAdd), listId: listId}));
+    setTimeout(() => {
+      const productToAdd = this.searchResult.products.find(obj => obj.code === code);
+      this.store.dispatch(new storeActions.AddItemToShoppingList({item: new ShoppingListItem(false, 1, productToAdd), listId: listId}));
+    }, 300);
+
   }
 
   // Item Already Added
@@ -111,6 +125,7 @@ export class SearchComponent implements OnInit {
     if (from === 'fromInput' && !this.focused) {
       this.focused = true;
     } else if (from === 'fromIcon') {
+      this.clearSearchResults();
       this.focused = false;
     }
   }
@@ -121,6 +136,31 @@ export class SearchComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  // Load more list items automaticall on scroll
+  @HostListener("window:scroll", [])
+  onScroll(): void {
+    if (this.bottomReached()) {
+      this.SearchMoreItems();
+    }
+  }
+
+  bottomReached(): boolean {
+    this.showSpinner();
+    return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+  }
+
+  sortByChanged(event) {
+    this.SearchItems(this.searchResult.freeTextSearch, event);
+  }
+
+  showSpinner() {
+    this.spinnerVisible = true;
+
+    setTimeout(() => {
+      this.spinnerVisible = false;
+    }, 3000);
   }
 
 }

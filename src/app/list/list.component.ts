@@ -164,7 +164,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   SearchItems(query) {
-    this.store.dispatch(new storeActions.FetchSearchResults({query: query, sortBy: 'relevance', currentPage: '1', pageSize: '10'}));
+    this.store.dispatch(new storeActions.FetchSearchResults({query: query, sortBy: 'relevance', currentPage: '1', pageSize: '10', isFirstFetch: true}));
   }
 
   addItemToList(code: string) {

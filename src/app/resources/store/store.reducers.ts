@@ -174,7 +174,21 @@ export function storeReducer (state = initialState, action: storeActions.StoreAc
         searchResults: action.payload
       };
 
+    case (storeActions.UPDATE_SEARCH_RESULTS) :
 
+      const searchResultToUpdate = state.searchResults;
+
+      searchResultToUpdate.pagination.currentPage = action.payload['pagination']['currentPage'];
+      if (action.payload['products']) {
+        action.payload['products'].forEach(eachObj => {
+          searchResultToUpdate.products.push(eachObj);
+        });
+      }
+
+      return {
+        ...state,
+        searchResults: searchResultToUpdate
+      };
 
 
 
