@@ -1,15 +1,15 @@
 # ShoppingList
-Application is created for Real.
-Appication is to maintain shopping list from Supermarket Real Products. Users can manage shopping lists and products inside shopping list. Thay can get detail information about products.
+An application is created for Real.
+<br>An application is to maintain the shopping list from Supermarket Real Products. Users can manage shopping lists and products inside the shopping list. They can get detail information about the products.
 
-<br> All data, which user will change will save in web application state and will relevant before webpage refreshs. <strong>After webpage refresh, all data will reset automatically. Application does not store any data in any database.</strong>
+<br> All data, which user will change will save in web application state and will relevant before webpage refreshes. <strong>After the webpage refresh, all data will reset automatically. An application does not store any data in any database.</strong>
 
 ## Demo
 <a target="_blank" href="http://list.fsdavid.com/">Live Demo</a>
 
 ## API connection
-To use application you should allow "Access-Control-Allow-Origin".
-  So, You need to add store app.
+To use the application you should allow "Access-Control-Allow-Origin". 
+So, You need to add a store app. 
  <br> For Chrome try <a target="_blank" href="https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc?utm_source=chrome-ntp-icon">Moesif</a>
  <br> For Firefox try <a target="_blank" href="https://addons.mozilla.org/en-US/firefox/addon/access-control-allow-origin/">access-control-allow-origin</a></p>
 
