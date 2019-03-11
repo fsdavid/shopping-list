@@ -1,5 +1,5 @@
-import {Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {animate, animateChild, query, stagger, state, style, transition, trigger} from '@angular/animations';
 import {SearchResultsModel} from '../resources/models/search-results/search-result.model';
 import {ShoppingListItem, ShoppingListModel} from '../resources/models/shopping-list/shopping-list.model';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -52,9 +52,31 @@ export interface DialogData {
       transition('in <=> out', animate('400ms ease-in-out')),
     ]),
 
+
+
+    trigger('list', [
+      transition(':enter', [
+        query('@items' , stagger(100, animateChild()), { optional: true })
+      ]),
+    ]),
+    trigger('items', [
+      // cubic-bezier for a tiny bouncing feel
+      transition('void => fly', [
+        style({ transform: 'scale(0.5)', opacity: 0 }),
+        animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
+          style({ transform: 'scale(1)', opacity: 1 }))
+      ]),
+      // transition(':leave', [
+      //   style({ transform: 'scale(1)', opacity: 1, height: '*' }),
+      //   animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
+      //     style({ transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px' }))
+      // ]),
+    ]),
+
+
   ]
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private sub: Subscription;
   currentListId: number;
@@ -78,6 +100,7 @@ export class ListComponent implements OnInit, OnDestroy {
   changingListName = false;
   firstNameChange = true;
   itemsPrice = 0;
+  firstEnter = 'fly';
 
   openedCard: number;
   openedCardSearch: number;
@@ -103,19 +126,22 @@ export class ListComponent implements OnInit, OnDestroy {
               this.shoppingList = eachObj;
             }
           });
+          // if (this.shoppingList.shoppingListItems.length) {
+          //   this.firstEnter = 'fly';
+          // }
 
 
-          //////// focus on list name after create
-            if (+this.shoppingList.listId === (+s.shoppingLists.length - 1) && this.shoppingList.shoppingListName === 'New list' && this.firstNameChange) {
-              this.firstNameChange = false;
-              this.changingListName = true;
-              setTimeout(() => {
-                if (this.listNameInput) {
-                  this.listNameInput.nativeElement.select();
-                  this.listNameInput.nativeElement.focus();
-                }
-              }, 300);
-            }
+          //////// focus on list name after create - Could have some bugs needs
+          //   if (+this.shoppingList.listId === (+s.shoppingLists.length - 1) && this.shoppingList.shoppingListName === 'New list' && this.firstNameChange) {
+          //     this.firstNameChange = false;
+          //     this.changingListName = true;
+          //     setTimeout(() => {
+          //       if (this.listNameInput) {
+          //         this.listNameInput.nativeElement.select();
+          //         this.listNameInput.nativeElement.focus();
+          //       }
+          //     }, 300);
+          //   }
 
           //////// Calculate Summary Price
           this.itemsPrice = 0;
@@ -138,6 +164,12 @@ export class ListComponent implements OnInit, OnDestroy {
 
 
 
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+        this.firstEnter = '';
+    }, 3000);
   }
 
   ngOnDestroy() {

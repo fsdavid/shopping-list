@@ -111,12 +111,12 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   // Item Already Added
   itemAdded (code: string, listId: number) {
-    if (this.shoppingLists[listId].shoppingListItems.find(obj => obj.item.code === code)) {
+    if (this.shoppingLists.find(obj => obj.listId === listId).shoppingListItems && this.shoppingLists.find(obj => obj.listId === listId).shoppingListItems.find(obj => obj.item.code === code)) {
       return true;
     }
   }
-  itemAddedCount (code: string, listId: string) {
-    const count = this.shoppingLists[listId].shoppingListItems.find(obj => obj.item.code === code).itemCount;
+  itemAddedCount (code: string, listId: number) {
+    const count = this.shoppingLists.find(obj => obj.listId === listId).shoppingListItems.find(obj => obj.item.code === code).itemCount;
     return count;
   }
 
