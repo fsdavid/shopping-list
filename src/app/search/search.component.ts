@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ImageDialog} from '../list/list.component';
 import {ShoppingListItem, ShoppingListModel} from '../resources/models/shopping-list/shopping-list.model';
+import {IsMobileService} from '../resources/services/is-mobile.service';
 
 @Component({
   selector: 'app-search',
@@ -28,7 +29,7 @@ import {ShoppingListItem, ShoppingListModel} from '../resources/models/shopping-
     ]),
   ]
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, AfterViewInit {
 
   focused = true;
   searchResult: SearchResultsModel;
@@ -41,16 +42,24 @@ export class SearchComponent implements OnInit {
   firstOpen: boolean;
   spinnerVisible = false;
   selectedSearchBy = 'relevance';
+  mobile = false;
 
   @ViewChild('SearchField') searchInput: ElementRef;
 
 
 
-  constructor(private store: Store<storeReducer.StoreState>, public dialog: MatDialog, ) { }
+  constructor(private store: Store<storeReducer.StoreState>, public dialog: MatDialog, private isMobile: IsMobileService) { }
 
   ngOnInit() {
     this.firstOpen = true;
-    this.searchInput.nativeElement.focus();
+
+    // Check if Device is Mobile
+    if (this.isMobile.isMobile()) {
+      this.mobile = true;
+    }
+    if (!this.mobile) {
+      this.searchInput.nativeElement.focus();
+    }
     this.shoppingListObservable = this.store.select('store');
     this.shoppingListObservable.subscribe(s => {
       this.searchResult = s.searchResults;
@@ -67,6 +76,11 @@ export class SearchComponent implements OnInit {
 
     });
     this.helpMenuOpenSearch = 'out';
+  }
+  ngAfterViewInit() {
+    if (this.mobile) {
+      this.searchInput.nativeElement.focus();
+    }
   }
 
   // Searching items
