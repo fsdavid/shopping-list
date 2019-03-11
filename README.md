@@ -1,7 +1,6 @@
 # ShoppingList
 Application is created for Real.
-
-
+Appication is to maintain shopping list from Supermarket Real Products. Users can manage shopping lists and products inside shopping list. Thay can get detail information about products.
 
 ## API connection
 To use application you should allow "Access-Control-Allow-Origin".
