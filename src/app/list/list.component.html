@@ -8,15 +8,17 @@
         <mat-icon class="edit-list-name-icon" (click) = "turnListNameChangingOn()">edit</mat-icon>
       </span>
 
-      <span *ngIf="changingListName" class="edit-list-name">
+      <span *ngIf="changingListName" class="edit-list-name" [ngClass] = "{'flex-direction-column' : mobile}">
         <mat-form-field>
           <input maxlength="30" placeholder="List name" [value]="shoppingList.shoppingListName" #ListNameField matInput>
         </mat-form-field>
         <mat-form-field>
           <input maxlength="50" placeholder="List description" [value]="shoppingList.shoppingListDescription" #ListDescriptionField matInput>
         </mat-form-field>
-        <mat-icon class="edit-list-name-icon save-list-name-icons" (click)="updateProductList()" style="color: greenyellow">check_circle</mat-icon>
-        <mat-icon class="edit-list-name-icon save-list-name-icons" style="color: orangered" (click) = "cancelListNameChanging()">cancel</mat-icon>
+        <span class="display-flex">
+          <mat-icon class="edit-list-name-icon save-list-name-icons" (click)="updateProductList()" style="color: greenyellow">check_circle</mat-icon>
+          <mat-icon class="edit-list-name-icon save-list-name-icons" style="color: orangered" (click) = "cancelListNameChanging()">cancel</mat-icon>
+        </span>
       </span>
 
     </mat-card-title>
