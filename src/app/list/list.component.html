@@ -29,7 +29,7 @@
         <span *ngIf="!shoppingList.shoppingListItems || !shoppingList.shoppingListItems.length" class="empty-list"> List is Empty </span>
 
 
-        <div  [@items]="firstEnter" *ngFor="let product of shoppingList.shoppingListItems; let i = index">
+        <div  [@items]="firstEnter" (@items.done)="this.firstEnter = '';" *ngFor="let product of shoppingList.shoppingListItems; let i = index">
 
 
           <mat-card #ItemsCard class="item-card mat-elevation-z0 " (mouseenter)="mouseHoveringCard(i)"(mouseleave)="mouseLeftCard()" [class.mat-elevation-z4]="mouseIsHoveringCard == i">
@@ -71,25 +71,25 @@
               <div *ngIf="openedCard === i" >
 
 
-                 <div class="card_description">
-                   <div class="card_left" >
+                 <div class="card_description" [ngClass] = "{'flex-direction-column' : mobile}">
+                   <div class="card_left" [ngStyle]="{width: mobile ? '100%' : '40%'}">
                      <img (mouseenter)="mouseHoveringCardImage(i)"(mouseleave)="mouseLeftCardImage()" (click)="openDialog('https://api.efood.real.de/' + product.item.images[product.item.images.length - 1].url)" [src] = "'https://api.efood.real.de/' + product.item.images[product.item.images.length - 1].url"/>
                    </div>
 
-                   <div class="card_right">
+                   <div class="card_right" [ngStyle]="{width: mobile ? '100%' : '60%'}">
                      <div class="card-title" [innerHTML]="product.item.description"></div>
 
                      <span class="fill-between-right-and-left">&nbsp;</span>
 
                      <div class="stock-info" >
-                       <div class="stock-flex">
-                       <div class=" base-price" *ngIf="product.item.price.basePrice">
-                         Base Price: {{product.item.price.basePrice.basePriceBaseFactor}} {{product.item.price.basePrice.basePriceUnit}} - €{{product.item.price.basePrice.basePrice}}
-                       </div>
-                       <div class="stock-available" [ngStyle]="{backgroundColor: product.item.stock ? '#8CC13F' : '#ED1651'}">
-                         <span *ngIf="product.item.stock; else OutOfStock">In Stock.</span>
-                         <ng-template #OutOfStock>Out of stock.</ng-template>
-                       </div>
+                       <div class="stock-flex" [ngClass] = "{'flex-direction-column' : mobile}">
+                        <div class=" base-price" *ngIf="product.item.price.basePrice">
+                          Base Price: {{product.item.price.basePrice.basePriceBaseFactor}} {{product.item.price.basePrice.basePriceUnit}} - €{{product.item.price.basePrice.basePrice}}
+                        </div>
+                        <div class="stock-available" [ngStyle]="{backgroundColor: product.item.stock ? '#8CC13F' : '#ED1651'}">
+                          <span *ngIf="product.item.stock; else OutOfStock">In Stock.</span>
+                          <ng-template #OutOfStock>Out of stock.</ng-template>
+                        </div>
                        </div>
                      </div>
                    </div>
@@ -186,15 +186,15 @@
               <div [@slideInOutSearch]="helpMenuOpenSearch" >
                 <div *ngIf="openedCardSearch === i" >
 
-                  <div class="card_description">
-                    <div class="card_left" >
+                  <div class="card_description" [ngClass] = "{'flex-direction-column' : mobile}">
+                    <div class="card_left" [ngStyle]="{width: mobile ? '100%' : '40%'}">
                       <img (click)="openDialog('https://api.efood.real.de/' + searchProduct.images[searchProduct.images.length - 1].url)" [src] = "'https://api.efood.real.de/' + searchProduct.images[searchProduct.images.length - 1].url"/>
                     </div>
-                    <div class="card_right">
+                    <div class="card_right" [ngStyle]="{width: mobile ? '100%' : '60%'}">
                       <div class="card-title" [innerHTML]="searchProduct.description"></div>
                       <span class="fill-between-right-and-left">&nbsp;</span>
                       <div class="stock-info align-flex-end">
-                        <div class="stock-flex">
+                        <div class="stock-flex" [ngClass] = "{'flex-direction-column' : mobile}">
                           <div class="item-added-chip base-price" *ngIf="searchProduct.price.basePrice">
                             Base Price: {{searchProduct.price.basePrice.basePriceBaseFactor}} {{searchProduct.price.basePrice.basePriceUnit}} - €{{searchProduct.price.basePrice.basePrice}}
                           </div>

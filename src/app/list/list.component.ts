@@ -26,17 +26,24 @@ export interface DialogData {
       transition('default => rotated', animate('400ms ease-in'))
     ]),
 
-    trigger('slideInOut', [
-      state('in', style({
 
-      })),
+
+    trigger('slideInOut', [
+      // state('in', style({
+      //
+      // })),
       state('out', style({
         opacity: '0',
         overflow: 'hidden',
         height: '0px',
         width: '0px'
       })),
-      transition('in <=> out', animate('400ms ease-in-out')),
+      transition('out <=> in', [
+        style({
+          opacity: 0
+        }),
+        animate('400ms ease-in-out')
+      ]),
     ]),
 
     trigger('slideInOutSearch', [
@@ -60,23 +67,17 @@ export interface DialogData {
       ]),
     ]),
     trigger('items', [
-      // cubic-bezier for a tiny bouncing feel
       transition('void => fly', [
         style({ transform: 'scale(0.5)', opacity: 0 }),
         animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
           style({ transform: 'scale(1)', opacity: 1 }))
       ]),
-      // transition(':leave', [
-      //   style({ transform: 'scale(1)', opacity: 1, height: '*' }),
-      //   animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
-      //     style({ transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px' }))
-      // ]),
     ]),
 
 
   ]
 })
-export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ListComponent implements OnInit, OnDestroy {
 
   private sub: Subscription;
   currentListId: number;
@@ -166,11 +167,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-        this.firstEnter = '';
-    }, 3000);
-  }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
@@ -241,7 +237,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.helpMenuOpen = this.helpMenuOpen === 'out' ? 'in' : 'out';
     } else {
       this.openedCard = i;
-      this.helpMenuOpen = 'in'; // this.helpMenuOpen === 'out' ? 'in' : 'out';
+      this.helpMenuOpen = 'in';
     }
   }
   toggleHelpMenuSearch(i: number): void {

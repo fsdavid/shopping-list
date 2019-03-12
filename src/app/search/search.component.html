@@ -81,15 +81,15 @@
             <div [@slideInOutSearch]="helpMenuOpenSearch" >
               <div *ngIf="openedCardSearch === i" >
 
-                <div class="card_description">
-                  <div class="card_left" >
+                <div class="card_description" [ngClass] = "{'flex-direction-column' : mobile}">
+                  <div class="card_left" [ngStyle]="{width: mobile ? '100%' : '40%'}" [ngStyle]="{maxWidth: mobile ? '100%' : null}">
                     <img (click)="openDialog('https://api.efood.real.de/' + searchProduct.images[searchProduct.images.length - 1].url)" [src] = "'https://api.efood.real.de/' + searchProduct.images[searchProduct.images.length - 1].url"/>
                   </div>
-                  <div class="card_right">
-                    <div class="card-title" [innerHTML]="searchProduct.description"></div>
+                  <div class="card_right" [ngStyle]="{width: mobile ? '100%' : '60%'}">
+                    <div class="card-title" [innerHTML]="searchProduct.description" ></div>
                     <span class="fill-between-right-and-left">&nbsp;</span>
                     <div class="stock-info align-flex-end">
-                      <div class="stock-flex">
+                      <div class="stock-flex" [ngClass] = "{'flex-direction-column' : mobile}">
                         <div class="item-added-chip base-price" *ngIf="searchProduct.price.basePrice">
                           Base Price: {{searchProduct.price.basePrice.basePriceBaseFactor}} {{searchProduct.price.basePrice.basePriceUnit}} - €{{searchProduct.price.basePrice.basePrice}}
                         </div>
